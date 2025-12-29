@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFFT - フォートナイトトラッカー</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #10b981;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+        
+        h1:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1em;
+        }
+        
+        .creator {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            font-size: 0.95em;
+            background: #10b981;
+            padding: 8px;
+            border-radius: 8px;
+        }
+        
+        .creator a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .creator a:hover {
+            text-decoration: underline;
+        }
+        
+        .search-container {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        input::placeholder {
+            color: #d1d5db;
+        }
+        
+        button {
+            padding: 12px 28px;
+            background: #14b8a6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        button:hover {
+            background: #0d9488;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(20, 184, 166, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .info-box {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f0fdf4;
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+        }
+        
+        .info-box h3 {
+            color: #10b981;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+        
+        .info-box p {
+            color: #059669;
+            line-height: 1.6;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        
+        .info-box strong {
+            color: #047857;
+        }
+        
+        .help-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #6b7280;
+        }
+        
+        .help-link a {
+            color: #10b981;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .help-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 onclick="window.location.reload()">トラッカー貫通</h1>
+        <p class="subtitle">フォートナイトトラッカー</p>
+        <div class="creator">制作者 <a href="https://twitter.com/Meary__a" target="_blank">@Meary__a</a></div>
+        
+        <div class="search-container">
+            <input type="text" id="username" placeholder="Ninja" />
+            <button onclick="Find()">検索</button>
+        </div>
+        
+
+
+    </div>
+
+    <script>
+        const usernameInput = document.getElementById('username');
+
+        usernameInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                Find();
+            }
+        });
+
+        function Find() {
+            const username = usernameInput.value.trim();
+            
+            if (!username) {
+                alert('ユーザー名を入力してください。');
+                return;
+            }
+
+            // Fortnite TrackerのEventsタブに直接リンク
+            // これがプライベートアカウントでも見れる秘密
+            const url = `https://fortnitetracker.com/profile/all/${encodeURIComponent(username)}/events`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
